@@ -4,10 +4,24 @@ import { API_URLS } from './config';
 import { messages } from './messages';
 import COOKE_IMAGE_1 from './assets/galleta-1.png';
 import COOKE_IMAGE_2 from './assets/galleta-2.png';
-import style from './styles.css';
 import { Spinner } from 'vtex.styleguide';
+import { useCssHandles } from 'vtex.css-handles';
+import './styles.css';
+
+const CSS_HANDLES = [
+  'cookieContainer', 
+  'cookieImage', 
+  'animate', 
+  'cookieTitle',
+  'cookiePhrase',
+  'luckyTitle',
+  'luckyNumber',
+  'textAnimation'
+] as const;
 
 export const Fortune: FC = () => {
+  const { handles } = useCssHandles(CSS_HANDLES);
+
   const [ phrase, setPhrase ] = useState<string>('');
   const [ luckyNumber, setLuckyNumber ] = useState<string>('');
   const [ isCookieActive, setCookieActive ] = useState<boolean>(false);
@@ -46,19 +60,19 @@ export const Fortune: FC = () => {
   }
 
   return (
-    <section className="flex">
-        <div className="center w-80 tc">
+    <section className="flex pa5 pb6">
+        <div className="center w-90 w-80-m tc">
 
-          <h2 className={style.cookieTitle}>
+          <h2 className={handles.cookieTitle}>
             {translateMessage(messages.title)}
           </h2>
 
-          <figure className={`center relative ${style.cookieContainer}`} onClick={getCookieList}>
+          <figure className={`center relative ${handles.cookieContainer}`} onClick={getCookieList}>
             <img 
-              className={`db absolute top-0 left-0 ${style.cookieImage} ${isCookieActive ? `${style.animate} o-100` : 'o-0'}`} 
+              className={`db absolute top-0 left-0 ${handles.cookieImage} ${isCookieActive ? `${handles.animate} o-100` : 'o-0'}`} 
               src={COOKE_IMAGE_2} />
             <img 
-              className={`db ${style.cookieImage} ${isCookieActive ? `${style.animate} o-0` : 'o-100'}`} 
+              className={`db ${handles.cookieImage} ${isCookieActive ? `${handles.animate} o-0` : 'o-100'}`} 
               src={COOKE_IMAGE_1} />
           </figure>
 
@@ -67,14 +81,14 @@ export const Fortune: FC = () => {
           )}
 
           {phrase && !isLoading && (
-            <div className={`${style.textAnimation}`}>
-              <h3 className={style.cookiePhrase}>
+            <div className={`${handles.textAnimation}`}>
+              <h3 className={handles.cookiePhrase}>
                 "{phrase}"
               </h3>
-              <h4 className={style.luckyTitle}>
+              <h4 className={handles.luckyTitle}>
                 {translateMessage(messages.lucky)}
               </h4>
-              <h5 className={style.luckyNumber}>
+              <h5 className={handles.luckyNumber}>
                 {luckyNumber}
               </h5>
             </div>
