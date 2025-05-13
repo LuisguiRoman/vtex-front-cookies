@@ -29,15 +29,17 @@ Una aplicación personalizada para VTEX IO que muestra una “galleta de la fort
 1. Clona el repositorio:
 git clone https://github.com/your-org/front-cookies.git
 
+---
 
 ## Enlaza tu app en un workspace de VTEX:
-vtex login youraccount
-vtex use yourworkspace
-vtex link
+- `vtex login youraccount`
+- `vtex use yourworkspace`
+- `vtex link`
 
+---
 
 ## Deploy
-vtex publish
-vtex deploy vendor.appname@x.x.x
-vtex install vendor.appname@x.x.x
+- `vtex publish`
+- `vtex deploy vendor.appname@x.x.x`
+- `vtex install vendor.appname@x.x.x`
 
