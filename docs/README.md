@@ -31,7 +31,7 @@ Una aplicación personalizada para VTEX IO que muestra una “galleta de la fort
 ## ⚙️ Instalación
 
 1. Clona el repositorio:
-- `git clone https://github.com/your-org/front-cookies.git`
+- `git clone git@github.com:LuisguiRoman/vtex-front-cookies.git`
 
 ---
 
