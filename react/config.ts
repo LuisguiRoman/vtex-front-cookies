@@ -1,3 +1,5 @@
-export const API_URLS = {
-    cookieList: '/api/dataentities/CF/search?_fields=CookieFortune&_pageSize=100'
+export const masterdataConfig = {
+    acronym: 'CF',
+    fields:["id", "CookieFortune"],
+    pageSize: 100
 };

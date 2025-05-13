@@ -1,11 +1,14 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
+import { useLazyQuery } from 'react-apollo';
 import { MessageDescriptor, useIntl } from 'react-intl';
-import { API_URLS } from './config';
+import GET_ALL_FORTUNE_COOKIES from './graphql/getCookies.graphql';
+import { masterdataConfig } from './config';
 import { messages } from './messages';
 import COOKE_IMAGE_1 from './assets/galleta-1.png';
 import COOKE_IMAGE_2 from './assets/galleta-2.png';
 import { Spinner } from 'vtex.styleguide';
 import { useCssHandles } from 'vtex.css-handles';
+import { parseFortunes } from './utils';
 import './styles.css';
 
 const CSS_HANDLES = [
@@ -20,34 +23,36 @@ const CSS_HANDLES = [
 ] as const;
 
 export const Fortune: FC = () => {
-  const { handles } = useCssHandles(CSS_HANDLES);
+  const { acronym, fields, pageSize } = masterdataConfig;
 
+  const { handles } = useCssHandles(CSS_HANDLES);
   const [ phrase, setPhrase ] = useState<string>('');
   const [ luckyNumber, setLuckyNumber ] = useState<string>('');
   const [ isCookieActive, setCookieActive ] = useState<boolean>(false);
-  const [ isLoading, setLoading ] = useState<boolean>(false);
   const intl = useIntl();
+
+  const [ getDocument, { data }] = useLazyQuery(GET_ALL_FORTUNE_COOKIES);
 
   const translateMessage = (message: MessageDescriptor) => intl.formatMessage(message);
 
-  const getCookieList = async () => {
-    setLoading(true);
+  const handleClick = () => {
     triggerCookie();
+    getDocument({variables: { acronym, fields, pageSize }});
+  }
 
-    try {
-      const response = await fetch(API_URLS.cookieList);
-      const data = await response.json();
+  useEffect(() => {
+    getCookieList();
+  }, [data, isCookieActive]);
 
-      const randomCookie = data[Math.floor(Math.random() * data.length)]?.CookieFortune;
+  const getCookieList = () => {
+    if(data && !isCookieActive){
+      const cookieList = parseFortunes(data);
+      const randomCookie = cookieList?.[Math.floor(Math.random() * cookieList?.length)]?.phrase;
       const randomNumber = Math.floor(Math.random() * 100_000_000)?.toString()?.padStart(8, '0');
       const formattedNumber = randomNumber.replace(/(\d{2})(\d{2})(\d{4})/, '$1-$2-$3');
 
       setPhrase(randomCookie);
       setLuckyNumber(formattedNumber);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
     }
   }
 
@@ -56,7 +61,7 @@ export const Fortune: FC = () => {
 
     setTimeout(() => {
       setCookieActive(false);
-    }, 1500);
+    }, 1000);
   }
 
   return (
@@ -67,7 +72,7 @@ export const Fortune: FC = () => {
             {translateMessage(messages.title)}
           </h2>
 
-          <figure className={`center relative ${handles.cookieContainer}`} onClick={getCookieList}>
+          <figure className={`center relative ${handles.cookieContainer}`} onClick={() => handleClick()}>
             <img 
               className={`db absolute top-0 left-0 ${handles.cookieImage} ${isCookieActive ? `${handles.animate} o-100` : 'o-0'}`} 
               src={COOKE_IMAGE_2} />
@@ -76,11 +81,11 @@ export const Fortune: FC = () => {
               src={COOKE_IMAGE_1} />
           </figure>
 
-          {isLoading && (
+          {isCookieActive && (
             <Spinner />
           )}
 
-          {phrase && !isLoading && (
+          {phrase && !isCookieActive && (
             <div className={`${handles.textAnimation}`}>
               <h3 className={handles.cookiePhrase}>
                 "{phrase}"
