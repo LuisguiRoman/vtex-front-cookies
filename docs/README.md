@@ -1,62 +1,43 @@
-# Minimum Boilerplate Theme
+# Fortune Cookies VTEX IO App
 
-The minimum Boilerplate Theme is basic store front model based on the VTEX IO Store Framework.
+Una aplicación personalizada para VTEX IO que muestra una “galleta de la fortuna” con un mensaje aleatorio y un número de la suerte. Usa React, VTEX Styleguide y traducciones con `react-intl`.
 
-It should be used only when you want to start a new store theme without any pre-set configurations, as is the case with [Store Theme](https://github.com/vtex-apps/store-theme). 
+---
 
-While Store Theme gives developers a ready-to-go default store front structure, the Minimum Boilerplate Theme will enable you to build you store freely from scratch.
+## 🚀 Características
 
-## Configuration
+- Animación de galleta al hacer clic
+- Obtención de frases desde Master Data (entidad `CF`)
+- Generación de número de la suerte con formato `XX-XX-XXXX`
+- Textos traducibles (`react-intl`)
+- Spinner de carga (vtex.styleguide)
+- Estilos personalizados con CSS Modules
 
-### Step 1 -  Basic setup
+---
 
-Access the VTEX IO [basic setup guide](https://developers.vtex.com/docs/guides/vtex-io-documentation-1-basicsetup) and follow all the given steps. 
+## 📋 Requisitos
 
-By the end of the setup, you should have the VTEX command line interface (Toolbelt) installed along with a developer workspace you can work in.
+- Node.js ≥ 14
+- VTEX Toolbelt (`vtex`)
+- Acceso a un workspace en VTEX IO
+- Master Data configurado con entidad `CF` y campo `CookieFortune`
 
-### Step 2 - Cloning the Minimum Boilerplate Theme repository
+---
 
-[Clone](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) this repository to your local files to be able to effectively start working on it.
+## ⚙️ Instalación
 
-Then, access the repository's directory using your terminal. 
+1. Clona el repositorio:
+git clone https://github.com/your-org/front-cookies.git
 
-### Step 3 - Editing the `Manifest.json`
 
-Once in the repository directory, it is time to edit the Minimum Boilerplate `manifest.json` file. 
+## Enlaza tu app en un workspace de VTEX:
+vtex login youraccount
+vtex use yourworkspace
+vtex link
 
-Once you are in the file, you must replace the `vendor` and `account` values. `vendor` is the account name you are working on and `account` is anything you want to name your theme. For example:
 
-```json
-{
-  "vendor": "storecomponents",
-  "name": "my-test-theme",
-}
-```
+## Deploy
+vtex publish
+vtex deploy vendor.appname@x.x.x
+vtex install vendor.appname@x.x.x
 
-### Step 4 -  Installing required apps
-
-In order to use Store Framework and work on your store theme, it is needed to have both `vtex.store-sitemap` and `vtex.store` installed.
-
-Run  `vtex list`  and check whether those apps are already installed. 
-
-If they aren't, run the following command to install them: `vtex install vtex.store-sitemap vtex.store -f`
-
-### Step 5 -  Uninstalling any existing theme
-
-By running `vtex list`,  you can verify if any theme is installed.
-
-It is common to already have a `vtex.store-theme`  installed when you start the store's front development process. 
-
-Therefore, if you find it in the app's list, copy its name and use it together with the command `vtex uninstall`. For example:
-
-```json
-vtex uninstall vtex.store-theme
-```
-
-### Step 6- Run and preview your store
-
-Then time has come to upload all the changes you made in your local files to the platform. For that, use the `vtex link` command. 
-
-If the process runs without any errors, the following message will be displayed: `App linked successfully`. Then, run the `vtex browse` command to open a browser window having your linked store in it.
-
-This will enable you to see the applied changes in real time, through the account and workspace in which you are working.
