@@ -1,6 +1,6 @@
 {
-  "fortune-cookies":{
-    "component" : "FortuneCookies",
+  "fortune-cookies": {
+    "component" : "index",
     "render": "client"
   }
 }

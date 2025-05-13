@@ -1,0 +1,58 @@
+.cookieContainer {
+  max-width: 180px;
+  cursor: pointer;
+}
+
+.cookieImage {
+  transition: .3s all ease-in-out;
+}
+
+.animate {
+  animation: vibrate 0.7s ease-in-out 0s 1 normal forwards;
+}
+
+.cookieTitle, .cookiePhrase, .luckyTitle, .luckyNumber {
+	text-align: center;
+}
+
+@keyframes vibrate {
+	0%,
+	100% {
+		transform: translateX(0%);
+		transform-origin: 50% 50%;
+	}
+	15% {
+		transform: translateX(-30px) rotate(-6deg);
+	}
+	30% {
+		transform: translateX(15px) rotate(6deg);
+	}
+	45% {
+		transform: translateX(-15px) rotate(-3.6deg);
+	}
+	60% {
+		transform: translateX(9px) rotate(2.4deg);
+	}
+	75% {
+		transform: translateX(-6px) rotate(-1.2deg);
+	}
+}
+
+.textAnimation {
+  animation-name: fadeInUp;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+} 
