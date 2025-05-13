@@ -14,6 +14,10 @@ Una aplicación personalizada para VTEX IO que muestra una “galleta de la fort
 - Estilos personalizados con CSS Modules
 
 ---
+## Ver aplicación
+[Dirigirse al workspace romanchallenge](https://romanchallenge--valtech.myvtex.com/fortune-cookies)
+
+---
 
 ## 📋 Requisitos
 
@@ -27,7 +31,7 @@ Una aplicación personalizada para VTEX IO que muestra una “galleta de la fort
 ## ⚙️ Instalación
 
 1. Clona el repositorio:
-git clone https://github.com/your-org/front-cookies.git
+- `git clone https://github.com/your-org/front-cookies.git`
 
 ---
 
